@@ -1,0 +1,51 @@
+Mercier Tony
+Jones Marie 
+
+ACT TP1 : 
+
+Première approche 
+
+Algo en n3 : 
+
+entrée : l , h entiers >0 
+         n entier >= 0
+         une liste tab contenant les coordonnées (xi,yi) des n points 
+
+sortie : la surface maximale d'un rectangle respectant les contraintes
+
+soient i,j,k,abs,largeur,minHauteur,max,tmps entiers;
+
+ajout des points (0,0) et (l,0) dans tab;
+tri rapide de tab;
+
+pour i allant de 0 à n
+
+    abs <- tab[i].xi
+
+    pour j allant de i + 1  à n + 1
+
+        largeur <- tab[j].xi - abs;
+        minHauteur <- h
+
+        pour k allant de i à j 
+
+            si (minHauteur > tab[k].yi)
+
+                minHauteur <- tab[k].yi
+
+            fin si
+
+        fin pour
+
+        tmp <- minHauteur * largeur
+
+        si (tmp > max)
+
+            max <- tmp
+
+        fin si 
+
+    fin pour 
+fin pour 
+
+retourner max;

@@ -1,0 +1,11 @@
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		//TODO : lecture du fichier passé en paramètre et récupération des arguments
+		
+		
+	}
+	
+}

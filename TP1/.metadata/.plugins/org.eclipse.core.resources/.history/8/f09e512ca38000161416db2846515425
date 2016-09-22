@@ -1,0 +1,25 @@
+import javafx.util.*;
+import java.util.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		//TODO : lecture du fichier passé en paramètre et récupération des arguments
+		
+		int h = 0;
+		int l = 0;
+		int n = 0;
+		int width,minHeight,max,tmp;
+		Pair<Integer,Integer>[] tab = new Pair<Integer,Integer>[n +2];
+		
+		//TODO : Ajouter (0,0) et (l,0)
+		//TODO : Tri rapide du tableau
+		
+		for (int i = 0 ; i <= n ; i++ ) {
+			int abs = 
+		}
+		
+	}
+	
+}

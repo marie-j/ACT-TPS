@@ -1,0 +1,18 @@
+import javafx.util;
+import java.util;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		//TODO : lecture du fichier passé en paramètre et récupération des arguments
+		
+		int h;
+		int l;
+		int n;
+		ArrayList<Pair<int,int>> dots = new ArrayList<Pair<int,int>>();
+		
+		dots.
+	}
+	
+}

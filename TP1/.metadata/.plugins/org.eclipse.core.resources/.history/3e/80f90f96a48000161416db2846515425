@@ -1,0 +1,53 @@
+import javafx.util.*;
+import java.util.*;
+import java.io.*;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		//TODO : lecture du fichier passé en paramètre et récupération des arguments
+		
+		String path = args[0];
+		
+		
+		int h = 0;
+		int l = 0;
+		int n = 0;
+		int max = 0;
+		Pair<Integer,Integer>[] tab = new Pair<Integer,Integer>[n +2];
+		
+		//TODO : Ajouter (0,0) et (l,0)
+		//TODO : Tri rapide du tableau
+		
+		for (int i = 0 ; i <= n ; i++ ) {
+			
+			int abs = tab[i].getKey(); 
+			
+			for (int j = i + 1 ; j < tab.length ; j++) {
+				
+				int width = tab[j].getKey() - abs;
+				int minHeight = h;
+				
+				for (int k = i ; k <= j ; k++) {
+					
+					if (minHeight > tab[k].getValue()) {
+						minHeight = tab[k].getValue();
+					}
+					
+				}
+				
+				int tmp = minHeight * width;
+				if (tmp > max) {
+					max = tmp;
+				}
+			}
+					
+		}
+		
+		//TODO : imprimer et non retourner 
+		return max; 
+		
+	}
+	
+}
