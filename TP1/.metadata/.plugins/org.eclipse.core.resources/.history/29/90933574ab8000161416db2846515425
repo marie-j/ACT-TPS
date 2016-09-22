@@ -60,36 +60,30 @@ public class Main {
 		//on trie le tableau par abscisses des points croissantes
 		Arrays.sort(tab, new Cmp());
 		
-		if (n == 0) {
-			max = w*h;
-		}
-		else {
+		// Algo en n3 trouvé 
+		for (int i = 0 ; i <= n ; i++ ) {
 			
-			// Algo en n3 trouvé 
-			for (int i = 0 ; i <= n ; i++ ) {
+			int abs = tab[i].getKey(); 
+			
+			for (int j = i + 1 ; j < tab.length ; j++) {
 				
-				int abs = tab[i].getKey(); 
+				int width = tab[j].getKey() - abs;
+				int minHeight = h;
 				
-				for (int j = i + 1 ; j <= n +1 ; j++) {
+				for (int k = i ; k <= j ; k++) {
 					
-					int width = tab[j].getKey() - abs;
-					int minHeight = h;
-					
-					for (int k = i +1 ; k < j ; k++) {
-						
-						if (minHeight > tab[k].getValue()) {
-							minHeight = tab[k].getValue();
-						}
-						
+					if (minHeight > tab[k].getValue()) {
+						minHeight = tab[k].getValue();
 					}
 					
-					int tmp = minHeight * width;
-					if (tmp > max) {
-						max = tmp;
-					}
 				}
-						
+				
+				int tmp = minHeight * width;
+				if (tmp > max) {
+					max = tmp;
+				}
 			}
+					
 		}
 		
 		System.out.println(max);

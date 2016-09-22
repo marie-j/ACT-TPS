@@ -60,6 +60,10 @@ public class Main {
 		//on trie le tableau par abscisses des points croissantes
 		Arrays.sort(tab, new Cmp());
 		
+		for (int i = 0 ; i < tab.length ; i++) {
+			System.out.println(tab[i]);
+		}
+		
 		if (n == 0) {
 			max = w*h;
 		}
@@ -70,12 +74,12 @@ public class Main {
 				
 				int abs = tab[i].getKey(); 
 				
-				for (int j = i + 1 ; j <= n +1 ; j++) {
+				for (int j = i + 1 ; j < tab.length ; j++) {
 					
 					int width = tab[j].getKey() - abs;
 					int minHeight = h;
 					
-					for (int k = i +1 ; k < j ; k++) {
+					for (int k = i ; k <= j ; k++) {
 						
 						if (minHeight > tab[k].getValue()) {
 							minHeight = tab[k].getValue();

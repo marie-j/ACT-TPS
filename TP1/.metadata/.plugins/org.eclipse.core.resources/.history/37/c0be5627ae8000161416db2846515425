@@ -75,7 +75,7 @@ public class Main {
 					int width = tab[j].getKey() - abs;
 					int minHeight = h;
 					
-					for (int k = i +1 ; k < j ; k++) {
+					for (int k = i ; k < j ; k++) {
 						
 						if (minHeight > tab[k].getValue()) {
 							minHeight = tab[k].getValue();
