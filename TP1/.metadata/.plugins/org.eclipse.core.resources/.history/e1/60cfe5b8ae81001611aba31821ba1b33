@@ -1,0 +1,123 @@
+package Premiere_approche_n2;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+
+import premiere_approche_n3.Point;
+import premiere_approche_n3.Cmp;
+
+
+public class Main {
+
+	/**
+	 * @param args
+	 * @throws IOException 
+	 */
+	public static void main(String[] args) throws IOException {
+		
+		
+		InputStream ips; 
+		InputStreamReader reader;
+		BufferedReader br = null;
+		
+		// lecture du fichier en paramètre
+		String path = args[0];
+		
+		try {
+			ips = new FileInputStream(path);
+			reader = new InputStreamReader(ips);
+			br = new BufferedReader(reader);
+		}
+		
+		catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		// récupération de l et h 
+		String line = br.readLine();
+		int w = Integer.parseInt(line.split(" ")[0]);
+		int h = Integer.parseInt(line.split(" ")[1]);
+		int max = 0;
+		
+		//récupération de n 
+		line = br.readLine();
+		int n = Integer.parseInt(line);
+		line = br.readLine();
+		
+		//création du tableau de points
+		Point[] tab = new Point[n +2];
+		tab[0] = new Point(0,0);
+		int cpt = 1;
+		
+		//on récupère tous les points 
+		while (line != null) {
+			
+			String[] t = line.split(" ");
+			int x = Integer.parseInt(t[0]);
+			int y = Integer.parseInt(t[1]);
+			
+			tab[cpt] = new Point(x,y);
+			cpt++;
+			
+			line = br.readLine();
+		}
+		
+		br.close();
+		
+		//on ajoute le point (l,0)
+		tab[cpt] = new Point(w,0);
+		
+		//on trie le tableau par abscisses des points croissantes
+		Arrays.sort(tab, new Cmp());
+		
+		if (n == 0) {
+			max = w*h;
+		}
+		else {
+			
+			// Algo en n2 trouvé 
+			for (int i = 0 ; i <= n ; i++ ) {
+				
+				int abs = tab[i].getKey(); 
+				int tmp = tab[i+1].getValue();
+				
+				int minHeight = 0;
+				
+				for (int j = i + 1 ; j <= n + 1  ; j++) {
+					
+					int width = tab[j].getKey() - abs;
+					int y = tab[j].getValue();
+					
+					if (j == i + 1) {
+						minHeight = h;
+					}
+					
+					if (y == tmp && j != i + 1) {
+						minHeight = y;
+					}
+					
+					if (y < tmp && y != 0) {
+						tmp = y;
+					}
+					
+					if (y >= tmp || (y == tmp && j != i +1)) {
+						minHeight = tmp;
+					}
+					
+					int res = minHeight * width;
+					
+					if (res > max) {
+						max = res;
+					}
+				}
+						
+			}
+		}
+		System.out.println(max);
+	}
+
+}
