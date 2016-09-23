@@ -3,9 +3,9 @@ Jones Marie
 
 ACT TP1 : 
 
-Première approche 
+> Première approche 
 
-Algo en n3 : 
+- Algo en n3 : 
 
 entrée : l , h entiers >0 
          n entier >= 0
@@ -49,3 +49,45 @@ pour i allant de 0 à n
 fin pour 
 
 retourner max;
+
+- Algo en n2 : 
+
+entrée : l , h entiers >0 
+         n entier >= 0
+         une liste tab contenant les coordonnées (xi,yi) des n points 
+
+sortie : la surface maximale d'un rectangle respectant les contraintes
+
+soient i,j,abs,largeur,minHauteur,max,tmp,y,res entiers;
+
+ajout des points (0,0) et (l,0) dans tab;
+tri rapide de tab;
+
+pour i allant de 0 à n 
+
+    abs <- tab[i].xi
+    tmp <- tab[i + 1].yi
+
+    pour j allant de i + 1 à n + 1 
+
+        largeur <- tab[j].xj - abs 
+        y <- tab[j].yj
+
+        si j = i + 1
+            minHauteur <- h
+        sinon
+            minHauteur <- tmp
+        fin si 
+
+        si y < tmp && y != 0 
+            tmp <- y
+        fin si 
+
+        res <- minHauteur * largeur
+
+        si res > max 
+            max = res
+        fin si 
+
+    fin pour
+fin pour 
