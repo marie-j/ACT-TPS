@@ -1,3 +1,5 @@
+package premiere_approche_n3;
+
 import java.util.*;
 import java.io.*;
 

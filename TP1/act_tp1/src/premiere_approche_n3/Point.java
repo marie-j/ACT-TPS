@@ -1,3 +1,4 @@
+package premiere_approche_n3;
 
 public class Point {
 
