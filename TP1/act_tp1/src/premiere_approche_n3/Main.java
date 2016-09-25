@@ -1,6 +1,5 @@
 package premiere_approche_n3;
 
-import java.util.*;
 import java.io.*;
 
 
@@ -8,79 +7,35 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		
-		InputStream ips; 
-		InputStreamReader reader;
-		BufferedReader br = null;
-		
-		// lecture du fichier en paramètre
 		String path = args[0];
+		Reader fr = new Reader();
 		
-		try {
-			ips = new FileInputStream(path);
-			reader = new InputStreamReader(ips);
-			br = new BufferedReader(reader);
-		}
+		fr.read(path);
 		
-		catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		
-		// récupération de l et h 
-		String line = br.readLine();
-		int w = Integer.parseInt(line.split(" ")[0]);
-		int h = Integer.parseInt(line.split(" ")[1]);
 		int max = 0;
 		
-		//récupération de n 
-		line = br.readLine();
-		int n = Integer.parseInt(line);
-		line = br.readLine();
-		
-		//création du tableau de points
-		Point[] tab = new Point[n +2];
-		tab[0] = new Point(0,0);
-		int cpt = 1;
-		
-		//on récupère tous les points 
-		while (line != null) {
-			
-			String[] t = line.split(" ");
-			int x = Integer.parseInt(t[0]);
-			int y = Integer.parseInt(t[1]);
-			
-			tab[cpt] = new Point(x,y);
-			cpt++;
-			
-			line = br.readLine();
-		}
-		
-		br.close();
-		
-		//on ajoute le point (l,0)
-		tab[cpt] = new Point(w,0);
-		
 		//on trie le tableau par abscisses des points croissantes
-		Arrays.sort(tab, new Cmp());
+		fr.tab.sort(new Cmp());
 		
-		if (n == 0) {
-			max = w*h;
+		if (fr.number == 0) {
+			max = fr.width * fr.height;
 		}
 		else {
 			
 			// Algo en n3 trouvé 
-			for (int i = 0 ; i <= n ; i++ ) {
+			for (int i = 0 ; i <= fr.number ; i++ ) {
 				
-				int abs = tab[i].getKey(); 
+				int abs = fr.tab.get(i).getKey(); 
 				
-				for (int j = i + 1 ; j <= n +1 ; j++) {
+				for (int j = i + 1 ; j <= fr.number +1 ; j++) {
 					
-					int width = tab[j].getKey() - abs;
-					int minHeight = h;
+					int width = fr.tab.get(j).getKey() - abs;
+					int minHeight = fr.height;
 					
 					for (int k = i +1 ; k < j ; k++) {
 						
-						if (minHeight > tab[k].getValue()) {
-							minHeight = tab[k].getValue();
+						if (minHeight > fr.tab.get(k).getValue() && fr.tab.get(k).getValue() != 0 ) {
+							minHeight = fr.tab.get(k).getValue();
 						}
 						
 					}

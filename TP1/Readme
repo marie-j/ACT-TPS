@@ -91,3 +91,68 @@ pour i allant de 0 à n
 
     fin pour
 fin pour 
+
+> Diviser pour régner 
+
+- Algo : 
+
+* Fonction principale
+
+entrée : l , h entiers >0 
+         n entier >= 0
+         une liste tab contenant les coordonnées (xi,yi) des n points 
+
+sortie : la surface maximale d'un rectangle respectant les contraintes
+
+soient i,j,k,abs,largeur,minHauteur,max,tmps entiers;
+
+ajout des points (0,0) et (l,0) dans tab;
+tri rapide de tab;
+
+rec (l,h,n,tab);
+
+* Fonction rec :
+
+entrée : l,h entiers > 0 
+         n entier >=0
+         liste tab de point triée par abscisse croissantes 
+
+sortie : surface maximale d'un rectangle respectant les contraintes
+
+    si n = 0 
+
+        retourner l * h 
+    
+    sinon
+
+        tmp <- n/2 + 1
+        pivot <- tab[tmp]
+
+        si n est pair
+
+            pivot_gauche <- tab[tmp - 1 ]
+            tranche_gauche <- rec (pivot.x - tab[0].x , h , tmp - 1, tab[0 ... tmp + 1])
+            tranche_droite <- rec( tab[n + 1].x - pivot_gauche.x, h , tmp - 1 , tab[tmp ... n + 1 ])
+
+            tranche_milieu <- h * (pivot.x - pivot_gauche.x)
+        
+        sinon
+
+            tranche_gauche <- rec(pivot.x - tab[0].x , h , tmp - 1,tab[0 ... tmp])
+            tranche_droite <- rec(tab[ n + 1].x - pivot.x , h, tmp - 1 , tab[tmp ... n + 1 ])
+
+            si ( pivot.y < max (tab[tmp - 1].y , tab[tmp + 1].y )
+
+                tranche_milieu <- (tab[tmp + 1].x - tab[tmp - 1].x) * pivot.y 
+
+            sinon
+
+                tranche_milieu <- rec(l, pivot.y , n - 1 , tab[0 ... tmp - 1 , tmp + 1 ... n + 1]);
+
+            fin si 
+
+        fin si 
+
+        max (tranche_droite,tranche_gauche,tranche_milieu);
+
+    fin si
