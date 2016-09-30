@@ -119,40 +119,57 @@ entrée : l,h entiers > 0
 
 sortie : surface maximale d'un rectangle respectant les contraintes
 
-    si n = 0 
+soient i , pivot, minHauteur,tranche_gauche,tranche_milieu,tranche_droite entiers;
+
+    si n = 0
 
         retourner l * h 
-    
-    sinon
 
-        tmp <- n/2 + 1
-        pivot <- tab[tmp]
+    sinon 
 
-        si n est pair
+        pivot <- 1
+        minHauteur <- tab[pivot].y
 
-            pivot_gauche <- tab[tmp - 1 ]
-            tranche_gauche <- rec (pivot.x - tab[0].x , h , tmp - 1, tab[0 ... tmp + 1])
-            tranche_droite <- rec( tab[n + 1].x - pivot_gauche.x, h , tmp - 1 , tab[tmp ... n + 1 ])
+        pour i allant de 2 à n 
 
-            tranche_milieu <- h * (pivot.x - pivot_gauche.x)
-        
-        sinon
+            si (tab[i].y < minHauteur ) 
 
-            tranche_gauche <- rec(pivot.x - tab[0].x , h , tmp - 1,tab[0 ... tmp])
-            tranche_droite <- rec(tab[ n + 1].x - pivot.x , h, tmp - 1 , tab[tmp ... n + 1 ])
+                pivot <- i 
 
-            si ( pivot.y < max (tab[tmp - 1].y , tab[tmp + 1].y )
+            fin si
 
-                tranche_milieu <- (tab[tmp + 1].x - tab[tmp - 1].x) * pivot.y 
+        fin pour 
 
-            sinon
+        tranche_milieu <- (tab[n +1].x - tab[0].x) * tab[pivot].y
+        tranche_gauche <- rec(tab[pivot].x - tab[0].x , h , pivot - 1 , tab[0 ... pivot])
+        tranche_droite <- rec(tab[n +1].x - tab[pivot].x,h, n - pivot , tab[pivot ... n +1 ])
 
-                tranche_milieu <- rec(l, pivot.y , n - 1 , tab[0 ... tmp - 1 , tmp + 1 ... n + 1]);
-
-            fin si 
-
-        fin si 
-
-        max (tranche_droite,tranche_gauche,tranche_milieu);
+        max(tranche_gauche,tranche_milieu,tranche_droite)
 
     fin si
+
+- Analyse de l'algo : 
+
+A l'éxécution, notamment pour l'exemple ex100000_100000, on constate que l'algo est beaucoup plus rapide . 
+
+Dans le meilleur des cas : n = 0 donc l'algo est en ɵ(1)
+
+Dans le pire des cas : Les ordonnées des points sont dans un ordre croissant ou décroissant
+
+    Equation de récurrence : 
+        rec(0) = k ou k entier 
+
+        rec(n) = rec(n-1) + rec(1) + O(n)
+        rec(n) = rec(n- 2) + rec(1) + rec(0) + k1*n + k1*n 
+        rec(n) = rec(n-3) + rec(1) + rec(0) + k1*n  + k + 2*k1*n
+        ...
+        rec(n) = (n-1)*k1*n + (n-2)*k
+
+        rec(n) = O(n2) 
+
+
+> Hauteur limitée 
+
+- Algo : 
+
+ 

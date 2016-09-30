@@ -1,23 +1,20 @@
-!SESSION 2016-09-23 18:30:07.416 -----------------------------------------------
+!SESSION 2016-09-28 13:50:12.770 -----------------------------------------------
 eclipse.buildId=4.6.0.I20160606-1100
-java.version=1.8.0_31
+java.version=1.8.0_91
 java.vendor=Oracle Corporation
-BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=fr_FR
-Framework arguments:  -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product
-Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -data /Users/Marie/Desktop/S1/ACT/TPS/TP1 -product org.eclipse.epp.package.java.product
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
 
-!ENTRY org.eclipse.ui 1 1 2016-09-23 18:30:46.968
+!ENTRY org.eclipse.ui 1 1 2016-09-28 13:50:18.700
 !MESSAGE Workbench migration started
 
-!ENTRY org.eclipse.core.net 1 0 2016-09-23 18:30:48.718
-!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
-
-!ENTRY org.eclipse.ui 1 1 2016-09-23 18:30:49.914
+!ENTRY org.eclipse.ui 1 1 2016-09-28 13:50:19.952
 !MESSAGE Workbench migration finished
 
-!ENTRY org.eclipse.ui 4 4 2016-09-23 18:30:52.881
+!ENTRY org.eclipse.ui 4 4 2016-09-28 13:50:23.272
 !MESSAGE Unable to create part
-!SUBENTRY 1 org.eclipse.core.filebuffers 4 0 2016-09-23 18:30:52.881
+!SUBENTRY 1 org.eclipse.core.filebuffers 4 0 2016-09-28 13:50:23.273
 !MESSAGE Cannot determine URI for '/act_tp1/src/Premiere_approche_n2/Main.java'.
 !STACK 1
 org.eclipse.core.runtime.CoreException: Cannot determine URI for '/act_tp1/src/Premiere_approche_n2/Main.java'.
@@ -42,7 +39,7 @@ org.eclipse.core.runtime.CoreException: Cannot determine URI for '/act_tp1/src/P
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:483)
+	at java.lang.reflect.Method.invoke(Method.java:498)
 	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:54)
 	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:966)
 	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:931)
@@ -164,27 +161,69 @@ org.eclipse.core.runtime.CoreException: Cannot determine URI for '/act_tp1/src/P
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:483)
+	at java.lang.reflect.Method.invoke(Method.java:498)
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:673)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:610)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1519)
-!SUBENTRY 2 org.eclipse.core.filebuffers 4 0 2016-09-23 18:30:52.884
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1492)
+!SUBENTRY 2 org.eclipse.core.filebuffers 4 0 2016-09-28 13:50:23.274
 !MESSAGE Cannot determine URI for '/act_tp1/src/Premiere_approche_n2/Main.java'.
 
-!ENTRY org.eclipse.m2e.logback.appender 4 0 2016-09-23 18:31:37.187
-!MESSAGE fatal: Could not switch to '/Applications/Xcode.app/Contents/Developer/usr/etc/': No such file or directory
+!ENTRY org.eclipse.jdt.launching 1 0 2016-09-28 13:50:50.585
+!MESSAGE Installed JRE 'Java SE 8 [1.8.0_31]' removed due to missing VM type extension.
 
-!SESSION 2016-09-23 18:33:51.369 -----------------------------------------------
+!ENTRY org.eclipse.jface.text 2 0 2016-09-28 14:03:37.938
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2016-09-28 14:03:37.940
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+!SESSION 2016-09-29 08:31:43.356 -----------------------------------------------
 eclipse.buildId=4.6.0.I20160606-1100
-java.version=1.8.0_31
+java.version=1.8.0_101
 java.vendor=Oracle Corporation
-BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=fr_FR
-Framework arguments:  -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product
-Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -data file:/Users/Marie/Desktop/S1/ACT/TPS/TP1/ -product org.eclipse.epp.package.java.product
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
 
-!ENTRY org.eclipse.core.net 1 0 2016-09-23 18:33:57.022
-!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+!ENTRY org.eclipse.jface.text 2 0 2016-09-29 08:32:23.468
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
 
-!ENTRY org.eclipse.m2e.logback.appender 4 0 2016-09-23 18:34:04.674
-!MESSAGE fatal: Could not switch to '/Applications/Xcode.app/Contents/Developer/usr/etc/': No such file or directory
+!ENTRY org.eclipse.jface.text 2 0 2016-09-29 08:32:23.474
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
 
+!ENTRY org.eclipse.jface.text 2 0 2016-09-29 09:12:48.550
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2016-09-29 09:12:48.552
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+!SESSION 2016-09-29 12:17:56.813 -----------------------------------------------
+eclipse.buildId=4.6.0.I20160606-1100
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -data /home/m1/jones/Bureau/M1S1/ACT/TPS/TP1 -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.core.net 1 0 2016-09-29 12:17:59.807
+!MESSAGE System property http.proxyHost is not set but should be cache-etu.univ-lille1.fr.
+
+!ENTRY org.eclipse.core.net 1 0 2016-09-29 12:17:59.824
+!MESSAGE System property http.proxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2016-09-29 12:17:59.826
+!MESSAGE System property https.proxyHost is not set but should be cache-etu.univ-lille1.fr.
+
+!ENTRY org.eclipse.core.net 1 0 2016-09-29 12:17:59.827
+!MESSAGE System property https.proxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.core.net 1 0 2016-09-29 12:17:59.830
+!MESSAGE System property https.proxyHost is not set but should be cache-etu.univ-lille1.fr.
+
+!ENTRY org.eclipse.core.net 1 0 2016-09-29 12:17:59.831
+!MESSAGE System property https.proxyPort is not set but should be 3128.
+
+!ENTRY org.eclipse.jface.text 2 0 2016-09-29 12:19:14.619
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2016-09-29 12:19:14.624
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'

@@ -9,60 +9,37 @@ import premiere_approche_n3.Reader;
 
 public class Main {
 	
-	protected static List<Point> splice (int index, List<Point> tab) {
-		List<Point> l1 = tab.subList(0, index);
-		List<Point> l2 = tab.subList(index + 1, tab.size());
-		l1.addAll(l2);
-		return l1;
-	}
 	
-	protected static int max_3 (int a , int b , int c) {
+	public static int max_3 (int a , int b , int c) {
 		
 		return Math.max(Math.max(a,b), c);
 	}
 	
-	protected static int rec (int width , int height , int n , List<Point> tab) {
+	public static int rec (int width, int height, int n , List<Point> tab) {
 		
 		if (n == 0) {
-			return width * height; 
+			return width * height;
 		}
-		
-		else {	
-			int tmp = n/2 + 1 ; 
-			Point pivot = tab.get(tmp);
+		else {
+			
+			int pivot = 1; 
+			int minHeight = tab.get(pivot).getValue();
 			int length = tab.size();
-			
-			int left ;
-			int right;
-			int middle;
-			
-			if (n % 2 == 0) {
-				
-				
-				Point pivot_gauche = tab.get(tmp - 1);
-				
-				left = rec( pivot.getKey() - tab.get(0).getKey(),height,tmp - 1,tab.subList(0,tmp + 2));
-				right = rec(tab.get(length - 1).getKey() - pivot_gauche.getKey(),height, tmp - 1, tab.subList(tmp - 1, length));
-				middle = height * (pivot.getKey() - pivot_gauche.getKey());
-			}
-			else {
-				
-				left = rec( pivot.getKey() - tab.get(0).getKey(),height,tmp - 1,tab.subList(0, tmp + 1));
-				right = rec (tab.get(length - 1).getKey() - pivot.getKey(),height, tmp - 1 ,tab.subList(tmp, length));
-				
-				if (pivot.getValue() < Math.max(tab.get(tmp -1).getValue(), tab.get(tmp + 1).getValue())) {
-					middle = (tab.get(tmp + 1).getKey()- tab.get(tmp - 1).getKey()) * pivot.getValue();
+			for (int i = 2 ; i < length -1 ; i++) {
+				if (tab.get(i).getValue() < minHeight && tab.get(i).getValue() != 0) {
+					minHeight = tab.get(i).getValue();
+					pivot = i;
 				}
-				
-				else {
-					middle = rec(width, pivot.getValue(),n - 1 , splice(tmp,tab));
+				if (tab.get(i).getValue() == minHeight && Math.abs(length/2 - i) < Math.abs(length/2 - pivot)) {
+					pivot = i; 
 				}
-				
-				
 			}
 			
-			return max_3(right,left,middle);
+			int middle = (tab.get(length -1).getKey() - tab.get(0).getKey()) * tab.get(pivot).getValue();
+			int left = rec (tab.get(pivot).getKey() - tab.get(0).getKey(),height,pivot -1,tab.subList(0, pivot +1));
+			int right = rec(tab.get(length - 1).getKey()- tab.get(pivot).getKey(),height, n - pivot, tab.subList(pivot, length));
 			
+			return max_3(left,middle,right);
 		}
 	}
 
