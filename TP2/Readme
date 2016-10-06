@@ -1,0 +1,68 @@
+Mercier Tony
+Jones Marie 
+
+ACT - TP2 : Programmation dynamique 
+
+Partie 1 : Implémentation 
+
+-- Meilleur gris  : on suppose qu'on dispose d'une palette qui est un tableau allant de 0 à 255 et qui pour chaque case contient le nombre 
+de pixels ayant pour niveau de gris l'indice de cette case
+
+    entrée : premier ,dernier des entiers >= 0 , <= 255, premier < dernier ;
+    sortie : moyenne pondérée de la tranche entre le premier et le dernier gris 
+
+    debut 
+
+        soient nb_total et somme_coeff des entiers; 
+
+        pour i allant de premier à dernier 
+
+            nb_total <- palette[i] + nb_total;
+            somme_coeff <- somme_coeff + palette[i]*i;
+        fin pour; 
+
+        retourner Partie_Entiere(somme_coeff/nb_total);
+
+    fin 
+
+-- Distance Minimale : comme pour meilleur gris nous disposons de la même palette 
+
+    entrée : premier , dernier des entiers >=0 , <= 255 , premier < dernier;
+    sortie : la distance minimale qu'entraine la fusion d'un intervalle de la palette 
+
+    debut
+
+        soient meilleur et dist des entiers;
+
+        meilleur = meilleur_gris(premier,dernier);
+
+        pour i allant de premier à dernier 
+
+            dist <- dist + (i - meilleur)^2 * palette[i]; 
+        fin pour;
+
+        retourner dist;
+    fin 
+
+-- Décomposition de l'image 
+
+    distance (k ) = distance_min (intervalle) + distance(k -1)
+
+    Algorithme : on suppose qu'on dispose d'une palette comme pour meilleur_gris
+
+    entrée : n , k des entiers >0;
+    sortie : distance minimale de mla réduction de la palette 
+
+    début 
+
+        soient tab un tableau à 255 cases de tableaux à 255 cases 
+
+        pour i allant de 0 à 255
+
+            si palette[i] != 0
+
+            fin si
+
+        fin pour
+    fin
+    
