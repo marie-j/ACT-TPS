@@ -41,7 +41,7 @@ de pixels ayant pour niveau de gris l'indice de cette case
             dist <- dist + (i - meilleur)^2 * palette[i]; 
         fin pour;
 
-        retourner dist;
+        retourner arrondi(dist);
     fin 
 
 -- Décomposition de l'image 
@@ -51,13 +51,13 @@ de pixels ayant pour niveau de gris l'indice de cette case
     Algorithme : on suppose qu'on dispose d'une palette comme pour meilleur_gris
 
     entrée : n , k des entiers >0;
-    sortie : distance minimale de la réduction de la palette 
+    sortie : un tableau contenant l'indice de début des intervalles, excepté pour le premier où on sait qu'il vaut 0 
 
     début 
 
         soient tab un tableau à 256 cases de tableaux à 256 cases 
-        soit rem un tableau à kl-1 cases
-        soientt d,cpt un entier;
+        soit rem un tableau à k cases
+        soient d,cpt,fin,i,j,m,p des entiers;
 
         //initialisation du tableau 
 
@@ -79,12 +79,32 @@ de pixels ayant pour niveau de gris l'indice de cette case
 
         //Remontée 
         d = tab[0][255]
-        cpt = k - 1
-        tant que (d != 0 && k != 0) faire
+        cpt = k -1
+        fin = 255
+        tant que (d != 0 ) faire
           
+          pour m allant de cpt à 0 faire
             
-                
-        fin tant que 
+            pour p allant de fin à 0 faire 
+
+                si (tab[p][fin] != MaxInt) alors
+
+                    fin = p -1; 
+                    d = d - tab[p][fin]
+                    rem[cpt] = p
+                    sortir de la boucle sur p 
+
+                fin si
+            fin pour
+          fin pour
+
+          si d < 0 alors 
+            d = tab[0][255]
+          fin si 
+
+        fin tant que
+
+        retourner rem;
 
     fin
 
@@ -118,4 +138,51 @@ de pixels ayant pour niveau de gris l'indice de cette case
                 fin pour 
             fin si
         fin
-    
+
+-- Calcul d'une nouvelle palette pour une image 
+
+    entrée : img une image  au format d'un tableau deux dimensions 
+            k le nombre de couleurs qu'on veut pour l'image 
+
+    sortie : un tableau à deux dimensions représentant la nouvelle image 
+
+    soit palette un tableau d'entier de taille 256
+    soit tab un tableau de taille k -1
+    soit new_gris un tableau de taille k 
+    soit nouvelle_image un tableau de tableaux aux mêmes dimensions que img
+    soient i, j ,l,tmp,debut des entiers
+
+    pour i allant de 0 à img.largeur faire 
+        pour j allant de 0 à img[i].longueur faire
+
+            palette[conversion_en_entier(img[i][j])]++;
+
+        fin pour
+    fin pour
+
+    tab = reduction(palette,k)
+
+    debut = 0
+    pour i allant de 0 à k -1 faire 
+        new_gris[i] = meilleur_gris(debut,tab[i] -1)
+        debut = tab[i]
+    fin pour 
+    new_gris[k] = meilleur_gris(debut,255)
+
+    pour i allant de 0 à img.largeur faire
+        pour j allant de 0 à img[i].longueur faire
+            tmp = img[i][j]
+            si tmp > tab[k -2] alors 
+                nouvelle_image[i][j] = new_gris[k -1]
+            sinon 
+                pour l allant de 0 à k -1 alors 
+                    si tmp < tab[l] alors 
+                        nouvelle_image[i][j] = new_gris[l]
+                        sortir de la boucle 
+                    fin si
+                fin pour 
+            fin si 
+        fin pour 
+    fin pour 
+
+    retourner nouvelle_image
