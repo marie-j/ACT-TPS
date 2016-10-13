@@ -56,6 +56,8 @@ de pixels ayant pour niveau de gris l'indice de cette case
     début 
 
         soient tab un tableau à 256 cases de tableaux à 256 cases 
+        soit rem un tableau à kl-1 cases
+        soientt d,cpt un entier;
 
         //initialisation du tableau 
 
@@ -74,6 +76,16 @@ de pixels ayant pour niveau de gris l'indice de cette case
 
         //on appelle la fonction récursive sur toute la palette avec k découpes
         rec(0,255,k)
+
+        //Remontée 
+        d = tab[0][255]
+        cpt = k - 1
+        tant que (d != 0 && k != 0) faire
+          
+            
+                
+        fin tant que 
+
     fin
 
     -- Fonction récursive : 
@@ -85,7 +97,7 @@ de pixels ayant pour niveau de gris l'indice de cette case
 
         debut 
 
-            si k = 0 alors
+            si k = 1 alors
 
                 si tab[debut][fin] = MaxInt alors
                     tab[debut][fin] = distance_min(debut,fin)
@@ -93,22 +105,16 @@ de pixels ayant pour niveau de gris l'indice de cette case
                 retourne tab[debut][fin]
 
             sinon 
-                
-                pour i allant de debut à fin faire 
 
-                    si palette[i] != 0 faire 
-                        pour j allant de i +1 à fin faire 
-                            si palette[j] != 0 faire 
+                pour j allant de debut + 1 à fin - 1  faire 
+                    si palette[j] != 0 faire 
 
-                                si tab[i][j] = MaxInt faire 
-                                    tab[i][j] = distance_min(i,j)
-                                fin si 
+                        si tab[debut][j] = MaxInt faire 
+                            tab[debut][j] = distance_min(debut,j)
+                         fin si 
 
-                                tab[debut][fin] = min(tab[debut][fin], tab[i][j] + rec(j+1,fin,k -1))
-
-                            fin si 
-                        fin pour 
-                    fin si
+                         tab[debut][fin] = min(tab[debut][fin], tab[debut][j] + rec(j+1,fin,k -1))
+                     fin si 
                 fin pour 
             fin si
         fin
