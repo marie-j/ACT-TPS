@@ -37,11 +37,10 @@ de pixels ayant pour niveau de gris l'indice de cette case
         meilleur = meilleur_gris(premier,dernier);
 
         pour i allant de premier à dernier 
-
             dist <- dist + (i - meilleur)^2 * palette[i]; 
         fin pour;
 
-        retourner arrondi(dist);
+        retourner dist;
     fin 
 
 -- Décomposition de l'image 
@@ -56,7 +55,7 @@ de pixels ayant pour niveau de gris l'indice de cette case
     début 
 
         soient tab un tableau à 256 cases de tableaux à 256 cases 
-        soit rem un tableau à k cases
+        soit rem un tableau à k -1 cases
         soient d,cpt,fin,i,j,m,p des entiers;
 
         //initialisation du tableau 
@@ -79,19 +78,18 @@ de pixels ayant pour niveau de gris l'indice de cette case
 
         //Remontée 
         d = tab[0][255]
-        cpt = k -1
         fin = 255
         tant que (d != 0 ) faire
           
-          pour m allant de cpt à 0 faire
+          pour m allant de k-1  à 0 faire
             
             pour p allant de fin à 0 faire 
 
                 si (tab[p][fin] != MaxInt) alors
 
-                    fin = p -1; 
                     d = d - tab[p][fin]
-                    rem[cpt] = p
+                    fin = p -1; 
+                    rem[m] = p
                     sortir de la boucle sur p 
 
                 fin si
