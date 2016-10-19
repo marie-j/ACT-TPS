@@ -1,7 +1,6 @@
 package palette;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -22,8 +21,12 @@ public class Palette {
 			sum += this.range[i]*i;
 		}
 		
-		return Math.floorDiv(sum, total);
-		
+		if (first == last) {
+			return first;
+		}
+		else {
+			return Math.floorDiv(sum, total);	
+		}	
 	}
 	
 	public int min_distance(int first, int last) {
@@ -59,31 +62,54 @@ public class Palette {
 	public int[] split_image(int k) {
 		for (int i = 0 ; i < 256 ; i++) {
 			for (int j = 0 ; j <256; j++) {
-				if (i != j) {
-					this.tab[i][j] = Integer.MAX_VALUE;
-				}
+				this.tab[i][j] = Integer.MAX_VALUE;
 			}
 		}
 		rec(0,255,k);
-		
-		int d = this.tab[0][255];
+
+		int min = this.tab[0][255];
+		int cpt = k; 
 		int end = 255;
-		int[] rem = new int[k - 1];
+		int start = 255;
+		boolean restart = false;
+		int tmp = start;
 		
-		while (d != 0) {
-			for(int i = k-2 ; i >= 0 ; i-- ) {
-				for (int j = end ; j >=0 ; j-- ) {
-					if (this.tab[j][end] != Integer.MAX_VALUE) {
-						d -= this.tab[j][end];
-						end = j -1;
-						rem[i] = j;
-						break;
+		int[] rem = new int[k -1];
+		
+		while (min != 0 && cpt != 1) {
+			
+			for (int i = start ; i >= 0 ;i--) {
+				
+				tmp = i;
+				
+				if (this.tab[i][end] != Integer.MAX_VALUE && this.tab[i][end] <= min) {
+					
+					
+					min -= this.tab[i][end];
+					
+					if(cpt != 1) {
+						rem[cpt - 2] = i;
 					}
+					
+					if (i == 0) {
+						restart = true;
+					}
+					else {
+						start = i -1;
+						end = i -1;
+						cpt--;
+					}
+					
+					break;
 				}
 			}
 			
-			if ( d < 0) {
-				d = this.tab[0][255];
+			if (restart && min != 0) {
+				cpt++;
+				end = rem[cpt - 2];
+				min = this.tab[0][255];
+				start = tmp; 
+				restart = false;
 			}
 		}
 		
@@ -93,7 +119,7 @@ public class Palette {
 	public static void main(String[] args) throws IOException {
 		String path = args[0];
 		int k = Integer.parseInt(args[1]);
-		List<List<Integer>> img = new ArrayList<List<Integer>>();
+		List<Integer> img = new ArrayList<Integer>();
 		
 		Palette p = new Palette();
 		
@@ -107,22 +133,15 @@ public class Palette {
 		}
 		
 		int grey = ips.read();
-		List<Integer> tmp = new ArrayList<Integer>();
 		while (grey != -1) {
-			if (grey == '\n') {
-				img.add(tmp);
-				tmp.removeAll(tmp);
-			}
-			else {
-				tmp.add(grey);
+			if (grey != '\n') {
+				img.add(grey);
 			}
 			grey = ips.read();
 		}
 		
 		for (int i = 0 ; i < img.size() ; i++) {
-			for (int j = 0 ; j <img.get(i).size() ; j++) {
-				p.range[img.get(i).get(j)]++;
-			}
+				p.range[img.get(i)]++;
 		}
 		
 		int[] tab = p.split_image(k);
@@ -134,30 +153,30 @@ public class Palette {
 			start = tab[i];
 		}
 		
-		new_grey[k] = p.best_grey(start,255);
-		int [][] new_img = new int[img.size()][img.get(0).size()];
+		new_grey[k - 1] = p.best_grey(start,255);
+		int [] new_img = new int[img.size()];
 		
 		for (int i = 0 ; i <img.size();i++) {
-			for (int j = 0 ; j < img.get(i).size() ; j++) {
-				int pixel = img.get(i).get(j);
+				int pixel = img.get(i);
 				if (pixel > tab[k - 2]) {
-					new_img[i][j] = new_grey[k - 1];
+					new_img[i] = new_grey[k - 1];
 				}
 				else {
 					for (int l = 0 ; l < k -1 ; l++ ) {
 						if (pixel < tab[l]) {
-							new_img[i][j] = new_grey[l];
+							new_img[i] = new_grey[l];
 							break;
-						}
 					}
 				}
 			}
 		}
 		
-		byte[] data = new_img.toString().getBytes();
-		FileOutputStream out = new FileOutputStream("new_img");
-		out.write(data);
-		out.close();
+		int lg = new_img.length;
+		for (int i = 0 ; i < lg ; i++) {
+			System.out.printf("%d",new_img[i]);
+			System.out.println();
+			
+		}
 	}
 
 }
