@@ -1,6 +1,7 @@
 package palette;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -150,6 +151,7 @@ public class Palette {
 		String path = args[0];
 		int k = Integer.parseInt(args[1]);
 		List<Integer> img = new ArrayList<Integer>();
+		String new_img = args[2];
 		
 		Palette p = new Palette();
 		
@@ -187,6 +189,8 @@ public class Palette {
 		Iterator<Integer> it = img.iterator();
 		int pixel = it.next();
 		
+		FileOutputStream out = new FileOutputStream(new_img);
+		
 		while (it.hasNext()) {
 			int tmp = 0;
 			if (pixel > tab[k - 2]) {
@@ -200,9 +204,11 @@ public class Palette {
 					}
 				}
 			}
-			System.out.print(tmp);
+			out.write(Integer.valueOf(tmp).byteValue());
 			pixel = it.next();
 		}
+		
+		out.close();
 	}
 
 }
