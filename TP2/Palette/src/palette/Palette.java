@@ -39,10 +39,15 @@ public class Palette {
 	}
 	
 	public int rec(int first, int last, int k) {
-		if (k == 1) {
-			if (this.tab[first][last] == Integer.MAX_VALUE) {
-				this.tab[first][last] = min_distance(first,last);
-			}
+		
+		if (this.tab[first][last] != Integer.MAX_VALUE) {
+			
+			return this.tab[first][last];
+		}
+		else if (k == 1) {
+			
+			this.tab[first][last] = min_distance(first,last);
+			
 			return this.tab[first][last];
 		}
 		else {
@@ -62,53 +67,71 @@ public class Palette {
 	public int[] split_image(int k) {
 		for (int i = 0 ; i < 256 ; i++) {
 			for (int j = 0 ; j <256; j++) {
-				this.tab[i][j] = Integer.MAX_VALUE;
+				this.tab[i][j] = Integer.MAX_VALUE;		
 			}
 		}
-		rec(0,255,k);
-
-		int min = this.tab[0][255];
+		
+		int min = rec(0,255,k);
 		int cpt = k; 
 		int end = 255;
-		int start = 255;
 		boolean restart = false;
-		int tmp = start;
+		int start = 255;
 		
 		int[] rem = new int[k -1];
 		
-		while (min != 0 && cpt != 1) {
+		while (min != 0 && cpt != 0) {
 			
-			for (int i = start ; i >= 0 ;i--) {
-				
-				tmp = i;
-				
-				if (this.tab[i][end] != Integer.MAX_VALUE && this.tab[i][end] <= min) {
-					
-					
-					min -= this.tab[i][end];
-					
-					if(cpt != 1) {
-						rem[cpt - 2] = i;
-					}
-					
-					if (i == 0) {
-						restart = true;
-					}
-					else {
-						start = i -1;
-						end = i -1;
-						cpt--;
-					}
-					
-					break;
+			if (cpt == 1) {
+				min -= this.tab[0][end];
+				if (min != 0) {
+					restart = true;
+				}
+				else {
+					cpt--;
 				}
 			}
+			else{
+			
+				for (int i = start ; i >= 0 ;i--) {
+				
+					if (this.tab[i][end] != Integer.MAX_VALUE && this.tab[i][end] <= min) {
+					
+						min -= this.tab[i][end];
+					
+						rem[cpt - 2] = i;
+					
+					
+						if (i == 0) {
+							restart = true;
+						}
+						else {
+							end = i -1;
+							start = end;
+							cpt--;
+						}
+						break;
+					}
+					
+						
+				}
+			}
+				
 			
 			if (restart && min != 0) {
 				cpt++;
-				end = rem[cpt - 2];
+				if (cpt == k) {
+					end = 255;
+				}
+				else {
+					end = rem[cpt - 1] -1;
+				}
+				start = rem[cpt -2] -1;
 				min = this.tab[0][255];
-				start = tmp; 
+				int tmp = 255;
+				for (int j = k -2 ; j > cpt -1 ; j--) {
+					min -= this.tab[rem[j]][tmp];
+					tmp = rem[j] -1;
+				}
 				restart = false;
 			}
 		}
@@ -136,12 +159,9 @@ public class Palette {
 		while (grey != -1) {
 			if (grey != '\n') {
 				img.add(grey);
+				p.range[grey]++;
 			}
 			grey = ips.read();
-		}
-		
-		for (int i = 0 ; i < img.size() ; i++) {
-				p.range[img.get(i)]++;
 		}
 		
 		int[] tab = p.split_image(k);
@@ -174,7 +194,7 @@ public class Palette {
 		int lg = new_img.length;
 		for (int i = 0 ; i < lg ; i++) {
 			System.out.printf("%d",new_img[i]);
-			System.out.println();
+			System.out.print("\n");
 			
 		}
 	}

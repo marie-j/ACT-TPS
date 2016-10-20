@@ -56,7 +56,8 @@ de pixels ayant pour niveau de gris l'indice de cette case
 
         soient tab un tableau à 256 cases de tableaux à 256 cases 
         soit rem un tableau à k -1 cases
-        soient d,cpt,fin,i,j,m,p des entiers;
+        soient cpt,fin,i,j,m,p,min,cpt,debut des entiers;
+        soit recommence un booleen
 
         //initialisation du tableau 
 
@@ -74,31 +75,63 @@ de pixels ayant pour niveau de gris l'indice de cette case
         fin pour
 
         //on appelle la fonction récursive sur toute la palette avec k découpes
-        rec(0,255,k)
+        min = rec(0,255,k)
 
         //Remontée 
-        d = tab[0][255]
+        cpt = k
         fin = 255
-        tant que (d != 0 ) faire
+        debut = 255
+        recommence = false
+
+        tant que (d != 0 et cpt != 0) faire
           
-          pour m allant de k-1  à 0 faire
-            
-            pour p allant de fin à 0 faire 
+          si cpt = 1 alors
+            min = min - tab[0][fin]
+            si min != 0 alors
+                recommence = true
+            sinon 
+                cpt -1
+            fin si
+        sinon 
+            pour m descendant de debut à 0
 
-                si (tab[p][fin] != MaxInt) alors
+                si tab[m][fin] = MaxInt && tab[i][end] <= min 
+                    min = min - tab[i][fin]
+                    rem[cpt -2] = i
 
-                    d = d - tab[p][fin]
-                    fin = p -1; 
-                    rem[m] = p
-                    sortir de la boucle sur p 
+                    si i = 0
+                        recommence = true
+                    sinon
+                        fin = i -1
+                        debut = fin
+                        cpt -1
+                    fin si 
+
+                    sortir de la boucle m
 
                 fin si
             fin pour
-          fin pour
 
-          si d < 0 alors 
-            d = tab[0][255]
-          fin si 
+            si recommence = true && min != 0 alors
+                cpt +1
+                
+                si cpt = k alors
+                    fin = 255
+                sinon 
+                    fin = rem[cpt -1] -1
+                fin si 
+
+                debut = rem[cpt -2] -1
+                min = tab[0][255]
+                tmp = 255
+
+                pour p allant de k -2 à cpt faire
+                    min = min - tab[rem[j]][tmp]
+                    tmp = rem[j] -1
+                fin pour 
+
+                recommence = false
+            fin si  
 
         fin tant que
 
