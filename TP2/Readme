@@ -217,3 +217,21 @@ de pixels ayant pour niveau de gris l'indice de cette case
     fin pour 
 
     retourner nouvelle_image
+
+-- Pourquoi fusionner des couleurs voisines ? 
+
+    Fusionner des couleurs voisines est plus efficace que fusionner des couleurs quelconques.
+
+    Reprenons l'exemple de l'énoncé , supposons que l'on fusionne 0 et 255 ensemble et 20 et 180 , la somme des deux sera beaucoup plus grande que la somme 0-20 et 180-255.
+
+    De plus en fusionnant des couleurs "voisines" on prend également en compte les couleurs dont le poids est à 0 , ce qui n'influe en rien la distance pour l'intervalle et qui élimine le risque qu'une de ces couleurs soit associée à un autre intervalle.
+
+Partie 2 : Utilisation
+
+Pour créer la nouvelle palette : 
+
+    java -jar palette.jar <image au format gray> <nombre de réductions> > <nom nouvelle image>
+
+Problème lors de la conversion en pgm avec image Magik , le format du fichier .gray est incorrect (même si il contient les bonnes valeurs ) 
+
+
