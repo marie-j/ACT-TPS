@@ -187,11 +187,12 @@ public class Palette {
 		
 		
 		Iterator<Integer> it = img.iterator();
-		int pixel = it.next();
+		
 		
 		FileOutputStream out = new FileOutputStream(new_img);
 		
 		while (it.hasNext()) {
+			int pixel = it.next();
 			int tmp = 0;
 			if (pixel > tab[k - 2]) {
 				tmp = new_grey[k - 1];
@@ -204,10 +205,8 @@ public class Palette {
 					}
 				}
 			}
-			out.write(Integer.valueOf(tmp).byteValue());
-			pixel = it.next();
+			out.write(tmp);
 		}
-		
 		out.close();
 	}
 
