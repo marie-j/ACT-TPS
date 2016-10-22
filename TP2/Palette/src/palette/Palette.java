@@ -166,10 +166,8 @@ public class Palette {
 		
 		int grey = ips.read();
 		while (grey != -1) {
-			if (grey != '\n') {
-				img.add(grey);
-				p.range[grey]++;
-			}
+			img.add(grey);
+			p.range[grey]++;
 			grey = ips.read();
 		}
 		
