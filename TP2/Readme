@@ -232,9 +232,5 @@ Pour créer la nouvelle palette :
 
     java -jar palette.jar <image au format gray> <nombre de réductions> > <nom nouvelle image>
 
-Pour init-palettes la conversion se passe bien , le résultat obtenu est test.png
-En revanche pour le babouin , une erreur apparaît et l'image est décalée. En effet on peut consater que ce qui est censé être le bord gauche dpartie basse de l'image est décaléee l'image apparaît à droite. 
-
-Lorsque que l'on imprime le résultat de la réduction, on obtient bien 3 niveaux de gris. 
-
+Pour init-palettes la conversion se passe bien , le résultat obtenu est test.pngNous avons également testé avec le babouin , le résultat obtenu est babouin.png 
 
