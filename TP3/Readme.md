@@ -43,7 +43,7 @@ Donc la taille d'un certificat est au plus k.
 
 ## Question 2 :
 
-#2.1
+# 2.1
 
 Idée :
     on utilise une stratégie gloutonne
@@ -57,7 +57,7 @@ Idée :
 
 Du fait que les sacs ont tous la même capacité, chacun d'entre eux a la même probabilité d'avoir une certaine combinaison d'objets. Par conséquent, chaque certificat à la même probabilité d'apparaître.
 
-#2.2
+# 2.2
 
 Idée :
       Tant que le certificat n'est pas valide ou qu'une limite est atteinte
@@ -78,7 +78,48 @@ Idée de limite pour arrêt de l'algorithme :
 
 ## Question 3 :
 
-#3.1
+# 3.1
 Pour n fixé, un certificat peut prendre k^n valeurs
 
-#3.2
+# 3.2
+
+Le plus petit : tous les objets sont dans le sac le plus à gauche 
+Le max : tous les objets sont dans le sac le plus à droite 
+Successeur : - on passe l'objet avec l'indice du plus grand au sac suivant 
+                si il est dans le dernier sac : on le remet dans le premier et c'est l'avant-dernier qui est décalé 
+                si l'avant-dernier est dans le dernier sac : on le remet dans le premier et c'est son précédent qui est décalé
+                etc ... 
+
+# 3.3
+
+    début : donnée BinPack 
+    sortie : Oui si il y aun certificat , non sinon 
+
+    debut 
+        certificat = premier certificat
+        
+        tant que (certificat a un suivant) faire 
+            
+            si algo de verificaton pour le certificat renvoie vrai alors
+                retourner le certificat
+            sinon 
+                passer au certificat suivant
+            fin si 
+
+        fin tant que 
+
+        vérifier le dernier certificat
+        
+        si valide
+            le retourner
+        sinon 
+            retourner faux; 
+        fin si 
+    
+    fin 
+
+Complexité de l'algo : k^n
+    Dans le pire des cas on va parcourir tous les certificats. 
+
+
+
