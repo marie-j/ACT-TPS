@@ -11,7 +11,9 @@ Un certificat correspond ici à une répartition des n objets dans les k sacs.
 Une implémentation possible est un tableau à k cases représentant les sacs et qui contient les objets et leur poids
 Donc la taille d'un certificat est au plus k.
 
-# Algo de vérification
+Une autre implémentation possible est un tableau à n cases, les indices représentant les objets et chaque case contient le numéro du sac associé 
+
+# Algo de vérification pour la première solution 
 
     entrée : un tableau tab de taille k, un entier c , un entier nb
     sortie : vrai si la répartition est correcte , faux sinon
@@ -40,7 +42,32 @@ Donc la taille d'un certificat est au plus k.
 
     fin
 
+# Algo de vérification pour la deuxième solution 
+    entrée : un tableau de taille n , un entier c , un entier nb 
+    sortie: vrai si la repartition est correcte, faux sinon 
 
+    debut 
+
+        soit tab un tableau de taille k 
+
+        pour i allant de 0 à n-1 faire 
+            si t[i] == 0 alors
+                retourner faux 
+            sinon 
+                tab[t[i]]++;
+            fin si
+        fin pour
+
+        pour i allant de 0 à k -1 faire 
+            si tab[i] > c alors
+                retourner faux
+            fin si 
+        fin pour 
+
+        retourner vrai 
+
+    fin 
+    
 ## Question 2 :
 
 # 2.1
