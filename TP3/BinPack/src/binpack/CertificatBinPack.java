@@ -8,6 +8,9 @@ public class CertificatBinPack implements Certificat
  public CertificatBinPack(PblBinPack p) {
 	 this.pb = p; 
 	 this.repartition = new int[p.getNbObjets()];
+	 for (int i = 0 ; i <p.getNbObjets() ; i++) {
+		 this.repartition[i] = -1;
+	 }
  }
     
  public CertificatBinPack(PblBinPack p, int[] aff) {
@@ -18,13 +21,14 @@ public class CertificatBinPack implements Certificat
     
  public boolean estCorrect(){
 	 
-	 //tableau qui stockera le poids de cahque sac
+	 //tableau qui stockera le poids de chaque sac
 	 int[] tab = new int[this.pb.getNbSacs()];
+	 
 	 
 	 //on parcourt le certificat
 	 for (int i = 0 ; i < this.repartition.length ; i++) {
 		 //si l'objet n'est pas dans un sac le certificat n'est pas valide
-		 if (this.repartition[i] == 0) {
+		 if (this.repartition[i] == -1) {
 			 return false;
 		 }
 		 //sinon on ajoute le poids dans le sac
@@ -47,7 +51,7 @@ public class CertificatBinPack implements Certificat
 
  public void suivant() {
 	 
-	 int sacs = this.pb.getNbSacs();
+	 int sacs = this.pb.getNbSacs() -1;
 	 int objets = this.pb.getNbObjets();
        
 	 //si le dernier élément n'est pas dans le dernier sac , on le déplace dans le sac suivant 
@@ -57,15 +61,15 @@ public class CertificatBinPack implements Certificat
 	 //sinon 
 	 else {
 		 //on replace le dernier sac dans le premier 
-		 this.repartition[objets -1] = 1;
+		 this.repartition[objets -1] = 0;
 		 int ret = 1; 
 		 int cpt = objets -2;
 		 //tant que tous les objets n'ont pas été décalés correctement on continue
-		 while (ret == 1 && cpt > 0) {
+		 while (ret == 1 && cpt >= 0) {
 			 this.repartition[cpt]++;
 			 //si un objet est dans un sac qui n'existe pas on le replace dans le premier
 			 if (this.repartition[cpt] > sacs) {
-				 this.repartition[cpt] = 1;
+				 this.repartition[cpt] = 0;
 				 cpt--;
 			 }
 			 //sinon on a bien décalé et on arrete la boucle 
@@ -80,7 +84,7 @@ public class CertificatBinPack implements Certificat
   	
 	 //pour chaque objet on vérifie qu'il se trouve bien dans le dernier sac 
 	 for (int i = 0 ; i < this.repartition.length ; i++) {
-		 if (this.repartition[i] != this.pb.getNbSacs()) {
+		 if (this.repartition[i] != this.pb.getNbSacs() - 1) {
 			 return false;
 		 }
 	 }
@@ -90,24 +94,24 @@ public class CertificatBinPack implements Certificat
  
  private int generateRandom(int max) {
 	 double tmp = Math.random();
-	 return (int) Math.floor(tmp * max) +1 ;
+	 return (int) Math.floor(tmp * max) ;
  }
     
  public void alea() {
-   	int cpt = this.pb.getNbObjets();
+   	int cpt = this.pb.getNbObjets() -1;
    	//tant que tous les objets n'ont pas été placés
-   	while (cpt > 0) {
-   		//on tire un nombre entre 1 et n
-   		int objet = generateRandom(this.pb.getNbObjets() - 1);
+   	while (cpt  >0) {
+   		//on tire un nombre entre 0 et n - 1
+   		int objet = generateRandom(this.pb.getNbObjets() - 1) ;
    		
    		//si l'objet n'a pas déjà été placé dans un sac
-   		if (this.repartition[objet -1] == 0) {
+   		if (this.repartition[objet] == -1) {
    			
-   			//on tire un nombre entre 1 et k
+   			//on tire un nombre entre 0 et k - 1
    			int sac = generateRandom(this.pb.getNbSacs() - 1);
    			
    			//on place l'objet dans le sac k et on indique qu'il y a un objet de moins à placer 
-   			this.repartition[objet -1] = sac;
+   			this.repartition[objet] = sac;
    			cpt--;
    		}
    	}
@@ -116,7 +120,7 @@ public class CertificatBinPack implements Certificat
  public void affiche() {
  	for (int i = 0 ; i < this.repartition.length ; i++) {
  		System.out.print("L'objet ");
- 		System.out.print(i+1);
+ 		System.out.print(i);
  		System.out.print(" a été placé dans le sac ");
  		System.out.print(this.repartition[i]);
  		System.out.println();

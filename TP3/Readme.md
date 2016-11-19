@@ -147,5 +147,26 @@ Successeur : - on passe l'objet avec l'indice du plus grand au sac suivant
 Complexité de l'algo : k^n
     Dans le pire des cas on va parcourir tous les certificats. 
 
+## Question 4
 
+### Réductions polynomiales
 
+## Question 5 
+
+# 5.1 
+
+x1 ... xn représentent les poids des objets (les indices i représentant les objets eux-même)
+n peut correspondre au nombre d'objet 
+La somme totale des éléments divisée par 2 peut représenter la capacité du sac 
+Et une partition peut représenter une instance de BinPack avec 2 sacs 
+
+# 5.2 
+
+Partition est NP-complète. Donc Partition est NP et NP-dure. 
+BinPack est NP. 
+Partition se reéduit polynomialement dans BinPack. Comme Partition est NP-dure, BinPack ets NP-dure.
+BinPack est donc NP et NP-dure donc BinPack est NP-complète.
+
+# 5.3 
+BinPack ne peut pas se réduire polynomialement dans Partition car on ne peut pas associer k et c. En effet dans PArtition p et c sont des constantes ce qui 
+modifie les données du problème BinPack  et donc le problème en lui-même

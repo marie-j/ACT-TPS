@@ -21,14 +21,14 @@ public class PblBinPack extends PblDec
     //on place tous les objets dans le premier sac 
     int[] aff = new int[this.nbObjets];
     for (int i = 0 ; i < this.nbObjets ; i++) {
-    	aff[i] = 1; 
+    	aff[i] = 0; 
     }
     
     CertificatBinPack c = new CertificatBinPack(this,aff);
     
     //tant qu'on a pas parcouru tous les certificats 
     while (!c.estDernier()) {
-    	
+    	   	
     	//si le certificat vérifie l'algo alors il ya une solution au moins 
     	if (c.estCorrect()) {
     		return true;
