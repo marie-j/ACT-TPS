@@ -160,6 +160,10 @@ n peut correspondre au nombre d'objet
 La somme totale des éléments divisée par 2 peut représenter la capacité du sac 
 Et une partition peut représenter une instance de BinPack avec 2 sacs 
 
+Si il existe une affectation telle que Partition est vraie on a donc somme(xi) = somme(xj) = somme(xk)/2
+si on applique red sur cette affectation cela signifie qu'on a 2 sacs de capacité somme(xk)/2 l'un contient somme(xi) et l'autre somme(xj)
+Si il n'existe pas de répartition pour Partition , il n'existe pas de répartition pour BinPack
+
 # 5.2 
 
 Partition est NP-complète. Donc Partition est NP et NP-dure. 
@@ -170,3 +174,38 @@ BinPack est donc NP et NP-dure donc BinPack est NP-complète.
 # 5.3 
 BinPack ne peut pas se réduire polynomialement dans Partition car on ne peut pas associer k et c. En effet dans PArtition p et c sont des constantes ce qui 
 modifie les données du problème BinPack  et donc le problème en lui-même
+
+## Question 6 
+
+Partition peut être vu comme un cas particulier de Sum. En effet, Partition est un problème Sum où l'entier cible prend une valeur particulière (la somme des éléments divisée par 2).
+Donc Partition peut se réduire polynomialement en Sum. 
+
+## Question 7 
+
+Données x1...xn et c
+On sait que : 
+    somme(i app J) xi = c
+    somme (k = 1 , n) xk = s
+On en déduit que 
+    somme (j napp J) xj = s - c 
+
+Pour que ce problème soit réduit il faut qu'on puisse avoir 
+    somme (i app J') = somme(j napp J') = somme(k = 1 , n') xk/2
+
+Si c = s -c = s/2  : on a déjà affaire à un problème de partition
+sinon si c > s - c : on cherche à ajouter un élément tel que c = s - c + ? 
+                    2c -s = ? 
+sinon c < s -c : on cherche à ajouter un élément tel que c + ? = s -c 
+                    ? = s - 2c 
+
+On résoud donc le problème de Partition pour x1...xn xn+1 avec xn+1 = s - 2c 
+
+on peut donc réduire Sum dans Partition 
+
+## Question 8 
+
+Pour implémenter une réduction de Sum dans BinPack :
+on ajoute s - 2c à la liste des poids d'objets 
+on augmente de 1 le nombre d'objets
+on utilise la somme/2 comme capacité
+et comme pour Partition on utilise uniquement 2 sacs 
