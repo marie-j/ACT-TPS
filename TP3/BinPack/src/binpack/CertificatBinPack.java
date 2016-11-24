@@ -17,6 +17,10 @@ public class CertificatBinPack implements Certificat
      this.pb = p; 
      this.repartition = aff;
     } 
+ 
+ public int[] getRepartition() {
+	 return this.repartition;
+ }
     
     
  public boolean estCorrect(){

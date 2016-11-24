@@ -169,6 +169,8 @@ Complexité de l'algo : k^n
 
 #### 5.1 
 
+##### construction
+
 x1 ... xn représentent les poids des objets (les indices i représentant les objets eux-même)
 
 n peut correspondre au nombre d'objet 
@@ -182,6 +184,21 @@ Si il existe une affectation telle que Partition est vraie on a donc somme(xi) =
 si on applique red sur cette affectation cela signifie qu'on a 2 sacs de capacité somme(xk)/2 l'un contient somme(xi) et l'autre somme(xj)
 
 Si il n'existe pas de répartition pour Partition , il n'existe pas de répartition pour BinPack
+
+##### construction polynomiale ? 
+
+partition : liste des objets : au max n*log(n)
+            nombre : log(n)
+            au max 2^n possibilités
+
+pour Bin Pack 
+taille des poids : au max n * log(n) 
+n : log(n)
+k = 2 
+=> au max 2^n possibilités 
+
+La construction est bien polynomiale en BinPack
+
 
 #### 5.2 
 
@@ -203,6 +220,8 @@ Partition peut être vu comme un cas particulier de Sum. En effet, Partition est
 Donc Partition peut se réduire polynomialement en Sum. 
 
 ### Question 7 
+
+##### construction 
 
 Données x1...xn et c
 
@@ -228,6 +247,13 @@ sinon c < s -c : on cherche à ajouter un élément tel que c + ? = s -c
 
 On résoud donc le problème de Partition pour x1...xn xn+1 avec xn+1 = s - 2c 
 
+##### construction polynomiale ? 
+
+Pour Sum on aura au max 2^n possibilités
+Pour Partition on a au max  2^(n +1) possibilités => 2^n *2
+
+La construction est bien polynomiale
+
 on peut donc réduire Sum dans Partition 
 
 ### Question 8 
@@ -239,6 +265,10 @@ Pour implémenter une réduction de Sum dans BinPack :
 * on utilise la somme/2 comme capacité
 * et comme pour Partition on utilise uniquement 2 sacs 
 
+Pour Sum on aura au max 2^n possibilités
+Pour BinPack on aura au max k^(n+1) or k = 2 => 2^(n+1) => 2^n *2 possibilités
+
+
 ### Question 9 
 
 Pour réduire BinPackDiff dans BinPack : 
@@ -246,5 +276,8 @@ Pour réduire BinPackDiff dans BinPack :
 * le nombre d'objet également
 * le nombre de sacs reste le même
 * En revanche la capacité du sac = somme(i = 1 , k) ck/k (on fait la moyenne des capacités)
+
+Pour BinPackDiff on aura k^n possibilités
+Pour BinPack on aura au max k^n possibilités également
 
 ## Optimisation vs Décision

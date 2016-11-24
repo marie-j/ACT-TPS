@@ -20,8 +20,21 @@ public static void main(String[] args) throws Exception {
         for (int i=0;i< nbObjets;i++) poids[i]=Integer.parseInt(donnee.readLine());
         int nbSacs=Integer.parseInt(args[2]);
         PblBinPack pb=new PblBinPack(nbObjets,poids,nbSacs,cap);
-        if (args[1].equals("-exh")) System.out.println(pb.aUneSolution());
-        else if (args[1].equals("-nd")) System.out.println(pb.aUneSolutionNonDeterministe());
+        if (args[1].equals("-exh")) {
+        	boolean tmp = pb.aUneSolution();
+        	System.out.println(tmp);
+        	if (tmp) {
+        		pb.getCertificat().affiche();
+        	}
+        }
+        	
+        else if (args[1].equals("-nd")) {
+        	boolean tmp = pb.aUneSolutionNonDeterministe();
+        	System.out.println(tmp);
+        	if (tmp) {
+        		pb.getCertificat().affiche();
+        	}
+        }
         else if (args[1].equals("-ver")) {
             BufferedReader entree = new BufferedReader (new InputStreamReader(System.in));
             int aff[]=new int[nbObjets];

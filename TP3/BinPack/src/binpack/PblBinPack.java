@@ -6,6 +6,7 @@ public class PblBinPack extends PblDec
     private int poids[];
     private int cap;
     private int nbSacs;
+    private CertificatBinPack c;
      //  //
     public PblBinPack(int n, int p[], int nbs, int c){
     nbObjets=n;
@@ -24,7 +25,7 @@ public class PblBinPack extends PblDec
     	aff[i] = 0; 
     }
     
-    CertificatBinPack c = new CertificatBinPack(this,aff);
+    this.c = new CertificatBinPack(this,aff);
     
     //tant qu'on a pas parcouru tous les certificats 
     while (!c.estDernier()) {
@@ -43,12 +44,12 @@ public class PblBinPack extends PblDec
     }
     
     //Algo non déterministe
-  //génère alétaoirement un certificat et vérifie si il est correct
+  //génère alétaoirement un certificat etthis.c  = new CertificatBinPack(pb.getBinPackRed()); vérifie si il est correct
     //si il y aune solution, au moins une exécution doit retourner Vrai
     // sinon, toutes les exécutions doivent retourner Faux
     public boolean aUneSolutionNonDeterministe() {
     	
-    	CertificatBinPack c = new CertificatBinPack(this);
+    	this.c = new CertificatBinPack(this);
     	c.alea();
     	return c.estCorrect();
     }
@@ -73,6 +74,10 @@ public class PblBinPack extends PblDec
    
     public int getPoidsForObject(int index) {
     	return this.poids[index];
+    }
+    
+    public CertificatBinPack getCertificat() {
+    	return this.c; 
     }
     
 }

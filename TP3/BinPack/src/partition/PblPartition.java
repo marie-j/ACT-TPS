@@ -47,17 +47,31 @@ public class PblPartition extends PblDec {
 	        int poids[]=new int[nbObjets];
 	        for (int i=0;i< nbObjets;i++) poids[i]=Integer.parseInt(s.readLine());
 	        PblPartition pb=new PblPartition(nbObjets,poids);
-	        if (args[1].equals("-exh")) System.out.println(pb.aUneSolution());
-	        else if (args[1].equals("-nd")) System.out.println(pb.aUneSolutionNonDeterministe());
+	        if (args[1].equals("-exh")) {
+	        	boolean tmp = pb.aUneSolution();
+	        	System.out.println(tmp);
+	        	if (tmp) {
+	        		Certificat c = new CertificatPartition(pb,pb.getBinPackRed().getCertificat().getRepartition());
+	        		c.affiche();
+	        	}
+	        }
+	        else if (args[1].equals("-nd")) {
+	        	boolean tmp = pb.aUneSolutionNonDeterministe();
+	        	System.out.println(tmp);
+	        	if (tmp) {
+	        		Certificat c = new CertificatPartition(pb,pb.getBinPackRed().getCertificat().getRepartition());
+	        		c.affiche();
+	        	}
+	        }
 	        else if (args[1].equals("-ver")) {
 	            BufferedReader entree = new BufferedReader (new InputStreamReader(System.in));
 	            int aff[]=new int[nbObjets];
 	            for (int i=0;i < nbObjets; i++) {
-	                System.out.print("préciser si l'entier est chosi (1) ou non (0) \n");
+	                System.out.print("préciser si l'entier est choisi (1) ou non (0) \n");
 	                System.out.print("pour l'entier "); System.out.println(poids[i]);
 	                aff[i]=Integer.parseInt(entree.readLine());
 	                if (aff[i] != 0 && aff[i] != 1) throw new Exception("valeur non autorisee");}
-	            Certificat cert =new CertificatBinPack(pb.getBinPackRed(),aff);
+	            Certificat cert =new CertificatPartition(pb,aff);
 	            System.out.println(cert.estCorrect());
 	        }
 	        else {
