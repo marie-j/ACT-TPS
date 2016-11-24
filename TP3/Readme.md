@@ -231,7 +231,7 @@ On sait que :
 
 On en déduit que :
 
-    somme (j napp J) xj = s - c 
+    somme (j nappint[] tmp J) xj = s - c 
 
 Pour que ce problème soit réduit il faut qu'on puisse avoir :
 
