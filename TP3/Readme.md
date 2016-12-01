@@ -281,3 +281,12 @@ Pour BinPackDiff on aura k^n possibilités
 Pour BinPack on aura au max k^n possibilités également
 
 ## Optimisation vs Décision
+
+### Question 10 
+
+Si BinPackOpt1 est P. On sait décider en temps polynomial le nombre minimum de sachets nécessaires. 
+Ainsi, pour un k donné dans le problème de BinPack, si celui-ci est inférieur au minimum on sait qu'il n'existe pas de répartition possible et sinon il en existe au moins une. 
+Les deux problèmes sont équivalents. Donc si l'un est P, l'autre l'est également. 
+
+Si BinPackOpt2 est P. On sait décider une répartition qui utilise un nombre minimal de sachets. 
+Donc on sait décider si il y a une répartition correcte. Donc on a également une solution pour BinPack. 
