@@ -1,5 +1,7 @@
 package pizza;
 
+import java.util.List;
+
 public class PblPizza {
 
 	protected int ham; 
@@ -23,5 +25,9 @@ public class PblPizza {
 	
 	public boolean[][] getPizza() {
 		return this.pizza;
+	}
+	
+	public List<Part> generateAll() {
+		
 	}
 }

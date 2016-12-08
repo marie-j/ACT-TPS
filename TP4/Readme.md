@@ -31,3 +31,10 @@ Dans le pire des cas on aura h*l opérations:
 Pour trouver une solution à ce problème, il faudrait parcourir tous les certificats. 
 Si on en trouve un correspondant on arrête le parcours mais si il n'y a pas de solutions il faudra parcourir tous les certificats. 
 
+## Serveur de validation
+
+### Solution aléatoire 
+
+#### 3.1 
+
+Idée de solutions : pour chaque case on associe des cases "supérieures" en essayant toutes les combinaisons et avec un nombre de cases croissant (cf pdf joint au rapport)
