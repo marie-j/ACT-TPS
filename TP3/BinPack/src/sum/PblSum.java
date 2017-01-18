@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.InputStreamReader;
 
 import binpack.Certificat;
-import binpack.CertificatBinPack;
 import binpack.PblDec;
 import partition.PblPartition;
 
@@ -78,7 +77,7 @@ public class PblSum extends PblDec {
 	            System.out.println(cert.estCorrect());
 	        }
 	        else {
-	            System.out.println("Usage: java  testBinPack <file>  <mode>ss");
+	            System.out.println("Usage: java -jar sum.jar  <file>  <mode>ss");
 	            System.out.println("where modes include: -ver (verif), -nd (non déterministe), -exh (exhaustif)");}
 
 	 	}
